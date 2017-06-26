@@ -1,0 +1,184 @@
+<!--
+	A Firefox homepage by Andrew Braunlich
+-->
+
+<html>
+	<head>
+		<title>firefox@tenkai</title>
+		<script src='src/jquery.js'></script>
+		<script src='src/search.js'></script>
+		<link rel='stylesheet' href='src/style.css'/>
+		
+		<script>
+		$(document).ready(function(){
+			var hour = new Date().getHours();	
+			var greeting = "";
+			if (hour < 4) {
+				greeting = "go to sleep";
+			} else if (hour < 12) {
+		  		greeting = "good morning";
+			} else if (hour < 18) {
+				greeting = "good afternoon";
+			} else {
+				greeting = "good evening";
+			}
+			$("#greet_text").append(greeting+", user@host");
+
+			var images = ["1.jpg","2.png","3.png","4.jpg"]
+			var texts = ["1.txt","2.txt","3.txt","4.txt"]
+			var selection = Math.floor(Math.random() * images.length);
+			$('#image_window').css('background-image', 'url(src/img/'+images[selection]+')');
+
+			function readTextFile(file) {
+    				var rawFile = new XMLHttpRequest();
+ 			   	rawFile.open("GET", file, false);
+ 			   	rawFile.onreadystatechange = function() {
+    	    				if(rawFile.readyState === 4) {
+						if(rawFile.status === 200 || rawFile.status == 0) {
+    	           					 allText = rawFile.responseText;
+				    	        }
+    	   				 }
+    				}
+    				rawFile.send(null);
+			}
+			readTextFile("src/txt/"+texts[selection]);
+			pair = allText.split("\n");
+			$('#name').text(pair[0]);
+			$('.quote').text(pair[1]);
+			
+			$('#image_window').click(function() {
+				selection++;
+				if (selection == images.length) {
+					selection-= selection;
+				}
+				$('#image_window').css('background-image', 'url(src/img/'+images[selection]+')');
+				readTextFile("src/txt/"+texts[selection]);
+				pair = allText.split("\n");
+				$('#name').text(pair[0]);
+				$('.quote').text(pair[1]);
+			});
+			
+			$('#sel1').hover(function(){
+				$('#tab1').show();
+				$('#tab2, #tab3, #tab4, #tab5').hide();
+				$('#sel1').css("background-color","#fdf6e3");
+				$('#sel2, #sel3, #sel4, #sel5').css("background-color","#fcf0cf");
+			});
+			$('#sel2').hover(function(){
+				$('#tab2').show();
+				$('#tab1, #tab3, #tab4, #tab5').hide();
+				$('#sel2').css("background-color","#fdf6e3");
+				$('#sel1, #sel3, #sel4, #sel5').css("background-color","#fcf0cf");
+			});
+			$('#sel3').hover(function(){
+				$('#tab3').show();
+				$('#tab1, #tab2, #tab4, #tab5').hide();
+				$('#sel3').css("background-color","#fdf6e3");
+				$('#sel1, #sel2, #sel4, #sel5').css("background-color","#fcf0cf");
+			});
+			$('#sel4').hover(function(){
+				$('#tab4').show();
+				$('#tab1, #tab2, #tab3, #tab5').hide();
+				$('#sel4').css("background-color","#fdf6e3");
+				$('#sel1, #sel2, #sel3, #sel5').css("background-color","#fcf0cf");
+			});
+			$('#sel5').hover(function(){
+				$('#tab5').show();
+				$('#tab1, #tab2, #tab3, #tab4').hide();
+				$('#sel5').css("background-color","#fdf6e3");
+				$('#sel1, #sel2, #sel3, #sel4').css("background-color","#fcf0cf");
+			});
+
+
+
+
+		});
+		</script>
+	</head>
+
+	<body>
+		<div id='main'>
+			<div id='greetingbar'>
+				<div id='greet_text'>
+				</div>
+				<input id='search' autocomplete='no' autofocus='yes' placeholder='search'></input>
+			</div>
+			
+			<div id='select'>
+				<div id='sel1'><span class='category_text'>item1</span></div>
+				<div id='sel2'><span class='category_text'>item2</span></div>
+				<div id='sel3'><span class='category_text'>item3</span></div>
+				<div id='sel4'><span class='category_text'>item4</span></div>
+				<div id='sel5'><span class='category_text'>item5</span></div>
+			</div>
+			
+			<div id='tab1'>
+				</br>
+				<ul>
+					<li><a href='http://www.com'>sample</a></li></br>
+					<li><a href='http://www.com'>sample</a></li></br>
+					<li><a href='http://www.com'>sample</a></li>
+				</ul>
+				
+				<p class='quote'></p>
+			</div>
+
+			<div id='tab2'>
+				</br>
+				<ul>
+					<li><a href='http://www.com'>sample</a></li></br>
+					<li><a href='http://www.com'>sample</a></li></br>
+					<li><a href='http://www.com'>sample</a></li></br>
+					<li><a href='http://www.com'>sample</a></li>
+
+				</ul>
+				
+				<p class='quote'></p>
+			</div>
+
+			<div id='tab3'>
+				</br>
+				<ul>
+					<li><a href='http://www.com'>sample</a></li></br>
+					<li><a href='http://www.com'>sample</a></li></br>
+					<li><a href='http://www.com'>sample</a></li></br>
+					<li><a href='http://www.com'>sample</a></li>
+				</ul>
+			
+				<p class='quote'></p>
+			</div>
+
+			<div id='tab4'>
+				</br>
+				<ul>
+					<li><a href='http://www.com'>sample</a></li></br>
+					<li><a href='http://www.com'>sample</a></li></br>
+					<li><a href='http://www.com'>sample</a></li></br>
+					<li><a href='http://www.com'>sample</a></li>
+				</ul>
+					
+				<p class='quote'></p>
+
+			</div>
+
+			<div id='tab5'>
+				</br>
+				<ul>
+					<li><a href='http://www.com'>sample</a></li></br>
+					<li><a href='http://www.com'>sample</a></li></br>
+					<li><a href='http://www.com'>sample</a></li></br>
+					<li><a href='http://www.com'>sample</a></li>
+				</ul>
+				
+				<p class='quote'></p>
+			</div>
+
+			<div id='image_window'>
+			</div>
+
+			<div id='image_caption'>
+				<div id='name'></div>
+			</div>
+		</div>
+	</body>
+</html>
